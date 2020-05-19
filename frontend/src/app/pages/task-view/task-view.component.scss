@@ -22,7 +22,7 @@
     padding: 42px;
     border-top-left-radius: 8px ;
     border-bottom-left-radius: 8px;
-    background-color: $reply-blue;
+    background-color: $eton-blue;
 }
 .tasks-list-container{
     display: flex;
@@ -31,14 +31,14 @@
     padding: 42px;
     border-top-right-radius: 8px ;
     border-bottom-right-radius: 8px;
-    background-color: $light-gray;
+    background-color: $forest-green;
 }
 .title{
     font-family: 'Lato';
     font-size: 24px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: rgb(204, 204, 204);
+    color: $platinum;
 }
 .list-menu{
     display: flex;
@@ -51,22 +51,22 @@
         padding: 10px 15px;
         border-radius: 5px;
         width: 100%;
-        color: white;
+        color:$skobeloff;
         margin-bottom:5px ;
 
         &:hover{
             background: rgba(255, 255, 255, 0.123);
         }
         &.is-active{
-            background-color: #31414b;
-            color: $reply-orange;
+            background-color: rgb(138, 182, 143);
+            color: $orange-peel;
         }
     }
 
 }
 .button{
-    color: $dark-gray;
-    background-color: $reply-orange;
+    color: $jungle-green;
+    background-color: $orange-peel;
     border: none;
     &:hover{
         background-color: #df982f;
@@ -87,7 +87,7 @@
             transform: scale(0.95);
         }
         &:hover{
-            box-shadow: 0 0 0 5px #717d83;
+            box-shadow: 0 0 0 5px #fcfcfc4b;
         }
     }
     &.complete{

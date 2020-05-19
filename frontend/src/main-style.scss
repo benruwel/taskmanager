@@ -3,23 +3,21 @@
 // Import Fonts (Lato and Nunito)
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
 
-$turquoise: #44ddd0;
-$green: #27d7a1;
-$reply-blue: #344955;
-$light-green: #45f69e; 
-$dark-green: rgb(0, 100, 80);
-$dark-gray : #232f34;
-$reply-orange : #f9aa33;
-$light-gray : #818f96;
+$jungle-green: #1F2421;
+$forest-green: #49A078;
+$eton-blue: #9CC5A1;
+$skobeloff: #216869;
+$platinum: #DCE1DE;
+$orange-peel: #FFA62B;
 
-$light: #f8f8f8;
+$bg-img: url(/assets/bg2.jpg);
+
+$light: $platinum;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
-$primary: $light-gray;
-$secondary : $reply-orange;
 
-$link: $reply-orange;
+$link: $platinum;
 
 // Update some of Bulma's component variables
 
@@ -31,9 +29,8 @@ $input-shadow: none;
 // Set custom global styles (will be applied to whole app)
 
 html {
-    background: #C9CCD3;
-    background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
-    background-blend-mode: lighten;
+    background: $bg-img center;
+    background-size: cover;   
 }
 
 html, body {

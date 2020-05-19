@@ -41,13 +41,46 @@ app.post("/lists", (req, res)=>{
 
 
 //update a specified list
-app.patch("/lists/id", (req, res)=>{
+app.patch("/lists/:id", (req, res)=>{
     //update the list with the new values spec by json req
+    List.findOneAndUpdate(
+        { _id: req.params.id }, 
+        {$set: req.body}). then(()=>{
+            res.sendStatus(200);
+        })
 })
 
 //delete a list
-app.delete("/lists", (req, res)=>{
+app.delete("/lists/:id", (req, res)=>{
     //delete a specified list
+    List.findOneAndDelete({
+        _id: req.params.id
+    }).then((removedListDoc)=>{
+        res.send(removedListDoc);
+    })
+})
+
+//routes for tasks
+app.get('/lists/:listId/tasks', (req, res)=>{
+    //return tasks corresponding to its list
+    Task.find({
+        _listId: req.params.listId
+    }).then((tasks)=>{
+        res.send(tasks);
+    })
+
+app.post("/lists/:listId/tasks", (res, req)=>{
+    //creating new tasks
+    
+    let newTask = new Task({
+        title : req.body.title,
+        _listId: req.params.listId
+    })
+    newTask.save().then((newTaskDoc)=>{
+        res.send(newTaskDoc);
+    })
+})
+
 })
 
 //starting a dev port
