@@ -1,13 +1,7 @@
 
 @import '../../../main-style.scss';
 
-.centered-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
+
 .task-manager-container{
     display: flex;
     width: 100%;
@@ -22,16 +16,17 @@
     padding: 42px;
     border-top-left-radius: 8px ;
     border-bottom-left-radius: 8px;
-    background-color: $eton-blue;
+    background-color: $skobeloff;
 }
 .tasks-list-container{
     display: flex;
     flex-grow: 1;
+    position: relative;
     flex-direction: column;
     padding: 42px;
     border-top-right-radius: 8px ;
     border-bottom-right-radius: 8px;
-    background-color: $forest-green;
+    background-color: $cadet-blue;
 }
 .title{
     font-family: 'Lato';
@@ -51,25 +46,25 @@
         padding: 10px 15px;
         border-radius: 5px;
         width: 100%;
-        color:$skobeloff;
+        color: black;
         margin-bottom:5px ;
 
         &:hover{
             background: rgba(255, 255, 255, 0.123);
         }
         &.is-active{
-            background-color: rgb(138, 182, 143);
-            color: $orange-peel;
+            background-color:$slate-gray;
+            color: white;
         }
     }
 
 }
 .button{
-    color: $jungle-green;
-    background-color: $orange-peel;
+    color: black;
+    background-color: $purple;
     border: none;
     &:hover{
-        background-color: #df982f;
+        background-color:#63144c;
     }
 }
 
@@ -78,7 +73,7 @@
     padding: 15px 20px;
     border-radius: 5px;
     margin-top: 10px;
-    color: white;
+    color: black;
     transition: box-shadow 0.2s ease, transform 0.2s ease ;
     cursor: pointer;
 
@@ -94,4 +89,17 @@
         text-decoration: line-through;
         opacity: 0.5;
     }
+}
+
+.circle-add-button{
+    height: 50px;
+    width: 50px;
+    background: $purple;
+    position: absolute;
+    border-radius: 50%;
+    bottom: 25px;
+    right: 25px;
+}
+svg{
+    color: white;
 }

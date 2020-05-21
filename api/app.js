@@ -3,15 +3,26 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('./db/mongoose');
 
-//load in db modules
-const { List, Task } = require('./db/models') 
+
 
 
 //load body-parser middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+//load in db modules
+const { List, Task } = require('./db/models') 
 
 
 //Route handlers
+
+//sets CORS headers to the responses
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update * to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 //List Route
 /**
@@ -69,9 +80,19 @@ app.get('/lists/:listId/tasks', (req, res)=>{
         res.send(tasks);
     })
 
-app.post("/lists/:listId/tasks", (res, req)=>{
+    //this sends a GET req to a specific taskId
+    // app.get('/lists/:listId/tasks/:taskId', (req, res)=>{
+    //     Task.findOne({
+    //         _id : req.params.taskId,
+    //         _listId : req.params.listId
+    //     }).then((tasks) =>{
+    //         res.send(tasks);
+    //     })
+    // })
+
+app.post('/lists/:listId/tasks', (req, res)=>{
     //creating new tasks
-    
+
     let newTask = new Task({
         title : req.body.title,
         _listId: req.params.listId
@@ -81,6 +102,28 @@ app.post("/lists/:listId/tasks", (res, req)=>{
     })
 })
 
+})
+
+//patch route
+app.patch('/lists/:listId/tasks/:taskId', (req, res)=>{
+    Task.findOneAndUpdate({ 
+        _id : req.params.taskId,
+        _listId : req.params.listId
+     }, {
+         $set : req.body
+     }).then(()=>{
+         res.sendStatus(200);
+     })
+})
+
+//delete route
+app.delete('/lists/:listId/tasks/:taskId', (req, res)=>{
+    Task.findByIdAndDelete({
+        _id : req.params.taskId,
+        _listId : req.params.listId
+    }).then((removedTaskDoc)=>{
+        res.send(removedTaskDoc);
+    })
 })
 
 //starting a dev port
