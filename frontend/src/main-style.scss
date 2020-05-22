@@ -12,6 +12,8 @@ $orange-peel: #FFA62B;
 $slate-gray : #1A5657;
 $cadet-blue : #63A4A5;
 $purple : #711958;
+$beau-blue : #C6E0FF;
+
 
 $bg-img: url(/assets/vct.png);
 
@@ -24,9 +26,9 @@ $link: $platinum;
 
 // Update some of Bulma's component variables
 
-$control-border-width: 2px;
-$input-border-color: transparent;
-$input-shadow: none;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
 
 
 // Set custom global styles (will be applied to whole app)
@@ -48,38 +50,37 @@ html, body {
 }
 
 
-/**
-.centered-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.modal-box{
+    min-height: 200px ;
     width: 100%;
-    height: 100%;
-}
-
-.modal-box {
-    min-height: 200px;
-    width: 100%;
-    max-width: 580px;
-    background: white;
-    border-radius: 5px;
+    max-width: 36vw;
+    background-color: $skobeloff;
+    border-radius: 8px;
     padding: 35px;
 }
-
-.title {
-    font-family: 'Lato';
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.title{
+    color: $platinum;
+}
+.input{
+    background-color: $cadet-blue;
+    border: none;
 }
 
-.white-box {
-    padding: 35px;
-    background: white;
-    border-radius: 5px;
-
-    width: 350px;
-    max-width: 350px;
-    
+.btn1, .btn2{
+    margin-right: 10px;
+    margin-top: 10px;
+    border: none;
+    color: $platinum;
 }
-**/
+.btn1{
+    background-color: $slate-gray;
+    &:hover{
+        color: red;
+    }
+}
+.btn2{
+    background-color: $purple;
+    &:hover{
+        background-color: #63144c;
+    }
+}

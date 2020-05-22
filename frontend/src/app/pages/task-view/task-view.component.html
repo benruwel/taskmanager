@@ -24,12 +24,12 @@
                 Tasks
             </h1>
             <!--Task elements-->
-            <div class="task" *ngFor="let task of tasks">
+            <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{'completed': task.completed}">
                 <p>{{ task.title }}</p>
             </div>
 
-            <button class="circle-add-button button">
-                <img src="../../../assets/plus.svg" alt="add task">
+            <button [routerLink]="['./new-task']" class="circle-add-button button">
+                <img  routerLinkActive="router-link-active"  src="../../../assets/plus.svg" alt="add task">
             </button>
 
         </div>
