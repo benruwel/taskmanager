@@ -1,0 +1,9 @@
+@import '../../../main-style.scss';
+
+
+.button{
+    background-color: $purple;
+    &:hover{
+    background-color:#63144c;
+    }
+}

@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //load in db modules
-const { List, Task } = require('./db/models') 
+const { List, Task, User } = require('./db/models') 
 
 
 //Route handlers
@@ -126,6 +126,59 @@ app.delete('/lists/:listId/tasks/:taskId', (req, res)=>{
         res.send(removedTaskDoc);
     })
 })
+
+//User routes
+//POST /users = signup
+
+app.post('/users', (req, res) =>{
+    let body = req.body;
+    let newUser = new User(body);
+
+    newUser.save().then(() =>{
+        return newUser.createSession();
+    }).then((refreshToken) =>{
+        //session created - refreshToken returned
+        //generate an access token for user
+        return newUser.generateAccessAuthToken().then((accessToken) =>{
+            //access auth token generated successfully, now return an object containing the auth tokens
+            return {accessToken, refreshToken} 
+        })
+    }).then((authToken) =>{
+        //now we costruct and send the response to the user with their auth tokens in the header and the user object in the body
+        res
+            .header('x-refresh-token', authToken.refreshToken)
+            .header('x-access-token', authToken.accessToken)
+            .send(newUser);
+    }).catch((e) =>{
+        res.status(400).send(e);
+    })
+})
+
+// POST /users/login = login
+app.post('/users/login', (req, res) =>{
+    let email = req.body.email;
+    let password = req.body.password;
+
+    User.findByCredentials(email, password).then((user) =>{
+        return user.createSession().then((refreshToken) =>{
+        //session created - refreshToken returned
+        //generate an access token for user
+        return newUser.generateAccessAuthToken().then((accessToken) =>{
+            //access auth token generated successfully, now return an object containing the auth tokens
+            return {accessToken, refreshToken} 
+        })
+        }).then((authToken) =>{
+        //now we costruct and send the response to the user with their auth tokens in the header and the user object in the body
+        res
+            .header('x-refresh-token', authToken.refreshToken)
+            .header('x-access-token', authToken.accessToken)
+            .send(newUser);
+        })
+    }).catch((e) =>{
+        res.status(400).send(e);
+    })
+})
+
 
 //starting a dev port
 app.listen(3000, ()=>{

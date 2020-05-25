@@ -28,13 +28,6 @@
     border-bottom-right-radius: 8px;
     background-color: $cadet-blue;
 }
-.title{
-    font-family: 'Lato';
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: $platinum;
-}
 .list-menu{
     display: flex;
     flex-direction: column;
@@ -47,7 +40,7 @@
         padding: 10px 15px;
         border-radius: 5px;
         width: 100%;
-        color: black;
+        color: $cadet-blue;
         margin-bottom:5px;
 
         &:hover{
@@ -55,7 +48,7 @@
         }
         &.is-active{
             background-color:$slate-gray;
-            color: $cadet-blue;
+            color: white;
         }
     }
     &::-webkit-scrollbar{
@@ -68,7 +61,7 @@
 
 }
 .button{
-    color: black;
+    color: white;
     background-color: $purple;
     border: none;
     &:hover{
@@ -81,7 +74,7 @@
     padding: 15px 20px;
     border-radius: 5px;
     margin-top: 10px;
-    color: black;
+    color:white;
     transition: box-shadow 0.2s ease, transform 0.2s ease ;
     cursor: pointer;
 
@@ -107,7 +100,4 @@
     border-radius: 50%;
     bottom: 25px;
     right: 25px;
-}
-svg{
-    color: white;
 }
