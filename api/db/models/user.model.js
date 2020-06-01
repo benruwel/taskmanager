@@ -41,7 +41,7 @@ UserSchema.methods.toJSON = function(){
     const userObject = user.toObject();
 
     //return the doc except the passwords and sessions(not public)
-    return _.omit(userObject, ['passowrd', 'sessions']);
+    return _.omit(userObject, ['password', 'sessions']);
 }
 
 UserSchema.methods.generateAccessAuthToken = function(){
@@ -62,9 +62,11 @@ UserSchema.methods.generateRefreshAuthToken = function() {
     //generate 64byte hex string but doesn't save it
     return new Promise((resolve, reject) =>{
          crypto.randomBytes(64, (err, buf) =>{
-             //if no error
-             let token = buf.toString('hex');
-             return resolve(token);
+            if (!err) {
+            //no error
+            let token = buf.toString('hex');
+            return resolve(token);
+            }
          })
     })
 }
@@ -91,18 +93,20 @@ UserSchema.statics.findByIdAndToken = function (_id, token) {
 
     return User.findOne({
         _id,
-        'session.token' : token
+        'sessions.token' : token
     })
 }
 
-UserSchema.statics.findByCredentials = function (email, passowrd) {
+UserSchema.statics.findByCredentials = function (email, password) {
     let User = this;
     return User.findOne({ email }).then((user) =>{
         if (!user) return Promise.reject();
 
         return new Promise ((resolve, reject) =>{
-            bcrypt.compare(passowrd, user.passowrd, (err, res) =>{
-                if (res) resolve(user);
+            bcrypt.compare(password, user.password, (err, res) =>{
+                if (res) {
+                    resolve(user);
+                }
                 else {
                     reject();
                 }
@@ -133,8 +137,8 @@ UserSchema.pre('save', function (next) {
         //if password field has been editted then run block
         //Generate salt
         bcrypt.genSalt(costFactor, (err, salt) =>{
-            bcrypt.hash(user.passowrd, salt, (err, hash) =>{
-                user.passowrd = hash;
+            bcrypt.hash(user.password, salt, (err, hash) =>{
+                user.password = hash;
                 next();
             })
         })
@@ -149,7 +153,7 @@ let saveSessionToDatabase = (user, refreshToken) =>{
     return new Promise((resolve, reject) =>{
         let expiresAt = generateRefreshTokenExpiryTime();
 
-        user.sessions.push({ 'token' : refreshToken, expiresAt})
+        user.sessions.push({ 'token' : refreshToken, expiresAt })
 
         user.save().then(() =>{
             //saved the session
