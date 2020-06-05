@@ -50,8 +50,14 @@ html, body {
     font-family: $family-sans-serif;
 }
 
+.button{
+    background-color: $purple;
+    &:hover{
+    background-color:#63144c;
+    }
+}
 
-.modal-box, .login-box{
+.modal-box, .dialog-box{
     min-height: 200px ;
     width: 100%;
     max-width: 36vw;

@@ -85,6 +85,11 @@ UserSchema.methods.createSession = function () {
 }
 
 //Model Methods = static methods-
+
+UserSchema.statics.getJWTSecret = () =>{
+    return jwtSecret;
+}
+
 UserSchema.statics.findByIdAndToken = function (_id, token) {
     //finds user by id and token
     //used in auth middleware
@@ -113,7 +118,6 @@ UserSchema.statics.findByCredentials = function (email, password) {
             })
         })
     })
-
 }
 
 UserSchema.statics.hasRefreshTokenExpired = (expiresAt) =>{
@@ -168,7 +172,8 @@ let saveSessionToDatabase = (user, refreshToken) =>{
 let generateRefreshTokenExpiryTime = () =>{
     let daysUntilExpire = "10";
     let secondsUntilExpire = ((daysUntilExpire * 24) * 60) * 60;
-    return((Date.now() / 1000) + secondsUntilExpire);
+    return ((Date.now() / 1000) + secondsUntilExpire);
+    
 }
 
 const User = mongoose.model('User', UserSchema);

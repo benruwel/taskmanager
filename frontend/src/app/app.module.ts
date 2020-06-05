@@ -7,9 +7,12 @@ import { TaskViewComponent } from './pages/task-view/task-view.component';
 import { NewListComponent } from './pages/new-list/new-list.component'
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { Webrequestinterceptor } from './web-req.interceptor.service';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+
 
 @NgModule({
   declarations: [
@@ -17,14 +20,17 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     TaskViewComponent,
     NewListComponent,
     NewTaskComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    SignupPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide : HTTP_INTERCEPTORS, useClass : Webrequestinterceptor, multi : true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
